@@ -1,0 +1,321 @@
+:root {
+    /* Светлая тема */
+    --bg-primary: #f4f7fc;
+    --bg-secondary: #ffffff;
+    --text-primary: #333;
+    --text-secondary: #666;
+    --accent: #ff6200;
+    --accent-hover: #ff8c00;
+    --card-bg: white;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow-hover: rgba(0, 0, 0, 0.2);
+    --header-overlay: rgba(0, 30, 60, 0.7);
+    --footer-bg: #001e3c;
+    --input-border: #ddd;
+    --input-focus: rgba(255, 98, 0, 0.3);
+}
+
+body.dark-theme {
+    /* Темная тема */
+    --bg-primary: #1a2b4b;
+    --bg-secondary: #2a3b6b;
+    --text-primary: #e8edf5;
+    --text-secondary: #a0b0d0;
+    --card-bg: #2a3b6b;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-hover: rgba(0, 0, 0, 0.5);
+    --header-overlay: rgba(0, 20, 40, 0.8);
+    --footer-bg: #0f1a30;
+    --input-border: #4a5b8b;
+    --input-focus: rgba(255, 98, 0, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+body {
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+}
+
+/* Хедер */
+header {
+    background: linear-gradient(var(--header-overlay), var(--header-overlay)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+header h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    animation: fadeInDown 1s ease-out;
+}
+
+header p {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 300;
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease-out 0.3s backwards;
+}
+
+.btn {
+    padding: 0.8rem 2rem;
+    background: linear-gradient(45deg, var(--accent), var(--accent-hover));
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 98, 0, 0.4);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* Переключатель темы */
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: white;
+    transition: transform 0.3s;
+}
+
+.theme-toggle:hover {
+    transform: rotate(20deg);
+}
+
+.theme-toggle:active {
+    transform: scale(0.9);
+}
+
+/* Секции */
+.destinations, .map, .booking {
+    padding: clamp(3rem, 6vw, 5rem) 2rem;
+    background: linear-gradient(180deg, var(--bg-secondary), var(--bg-primary));
+    position: relative;
+    overflow: hidden;
+}
+
+.destinations h2, .map h2, .booking h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Карточки */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px var(--shadow);
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.3s ease;
+}
+
+.card.visible {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px var(--shadow-hover);
+}
+
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover img {
+    transform: scale(1.1);
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.card-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.card-content p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+/* Карта */
+.map #map {
+    height: 500px;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px var(--shadow);
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.map #map.loaded {
+    opacity: 1;
+}
+
+.filter {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.filter div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.filter select {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.filter select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 5px var(--input-focus);
+    outline: none;
+}
+
+.reset-btn {
+    background: linear-gradient(45deg, #666, #888);
+}
+
+.reset-btn:hover {
+    background: linear-gradient(45deg, #555, #777);
+    box-shadow: 0 5px 15px var(--shadow-hover);
+}
+
+/* Форма бронирования */
+.booking {
+    background: linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));
+}
+
+.booking form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px var(--shadow);
+}
+
+.booking input, .booking select {
+    padding: 0.8rem;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.booking input:focus, .booking select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 5px var(--input-focus);
+    outline: none;
+}
+
+/* Футер */
+footer {
+    background: var(--footer-bg);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+}
+
+/* Анимации */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    .filter {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .card {
+        transform: scale(1);
+    }
+
+    header {
+        background-attachment: scroll;
+    }
+}
