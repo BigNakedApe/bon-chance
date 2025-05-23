@@ -1,1 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тропический отдых</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Тропический рай ждет вас</h1>
+            <p>Идеальный пляжный отдых на лучших островах</p>
+            <a href="#booking" class="btn">Забронировать тур</a>
+        </div>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+            <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+            <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+        </button>
+    </header>
 
+    <section class="destinations">
+        <h2>Ваши тропические направления</h2>
+        <div class="grid" id="destinations-grid"></div>
+    </section>
+
+    <section class="map">
+        <h2>Выберите свой остров</h2>
+        <div class="filter">
+            <div>
+                <label for="continent-filter">Регион: </label>
+                <select id="continent-filter">
+                    <option value="all">Все регионы</option>
+                    <option value="Asia">Азия</option>
+                    <option value="Indian Ocean">Индийский океан</option>
+                    <option value="Atlantic Ocean">Атлантический океан</option>
+                </select>
+            </div>
+            <div>
+                <label for="type-filter">Тип отдыха: </label>
+                <select id="type-filter">
+                    <option value="all">Все типы</option>
+                    <option value="Beach">Пляжный отдых</option>
+                    <option value="Luxury">Люксовый отдых</option>
+                </select>
+            </div>
+            <div>
+                <label for="budget-filter">Бюджет: </label>
+                <select id="budget-filter">
+                    <option value="all">Все бюджеты</option>
+                    <option value="Economy">Эконом ($)</option>
+                    <option value="Standard">Средний ($$)</option>
+                    <option value="Premium">Премиум ($$$)</option>
+                </select>
+            </div>
+            <div>
+                <label for="rating-filter">Рейтинг отеля: </label>
+                <select id="rating-filter">
+                    <option value="all">Все рейтинги</option>
+                    <option value="4.0">≥4.0</option>
+                    <option value="4.5">≥4.5</option>
+                </select>
+            </div>
+            <div>
+                <label for="price-filter">Цена отеля: </label>
+                <select id="price-filter">
+                    <option value="all">Все цены</option>
+                    <option value="200">≤$200</option>
+                    <option value="300">≤$300</option>
+                </select>
+            </div>
+            <button class="btn reset-btn" id="reset-filters">Сбросить</button>
+        </div>
+        <div id="map"></div>
+    </section>
+
+    <section class="booking" id="booking">
+        <h2>Забронировать отдых</h2>
+        <form id="booking-form">
+            <div class="input-group">
+                <input type="text" id="name" placeholder="Ваше имя" required>
+                <span class="input-icon">👤</span>
+            </div>
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Ваш email" required>
+                <span class="input-icon">✉️</span>
+            </div>
+            <div class="input-group">
+                <select id="destination" required>
+                    <option value="" disabled selected>Выберите направление</option>
+                </select>
+                <span class="input-icon">🏝️</span>
+            </div>
+            <div class="input-group">
+                <select id="hotel" required>
+                    <option value="" disabled selected>Выберите отель</option>
+                </select>
+                <span class="input-icon">🏨</span>
+            </div>
+            <div class="input-group">
+                <input type="date" id="date" required>
+                <span class="input-icon">📅</span>
+            </div>
+            <button type="submit" class="btn">Отправить заявку</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2025 Тропический отдых. Все права защищены.</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
