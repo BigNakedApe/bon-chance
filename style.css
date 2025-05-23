@@ -1,1 +1,409 @@
+/* Сброс стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+/* Переменные для светлой и темной темы */
+:root {
+    --bg-primary: #e6f0fa;
+    --bg-secondary: #f0f8ff;
+    --text-primary: #1a3c5e;
+    --text-secondary: #4a6b8a;
+    --accent: #00b4d8;
+    --accent-hover: #48cae4;
+    --card-bg: #ffffff;
+    --shadow: rgba(0, 50, 100, 0.1);
+    --shadow-hover: rgba(0, 50, 100, 0.2);
+    --header-overlay: rgba(0, 50, 100, 0.6);
+    --footer-bg: #1a3c5e;
+    --input-border: #b0c4de;
+    --input-focus: rgba(0, 180, 216, 0.3);
+}
+
+body.dark-theme {
+    --bg-primary: #0a1e38;
+    --bg-secondary: #1b2f50;
+    --text-primary: #e6f0fa;
+    --text-secondary: #a0b0d0;
+    --card-bg: #1b2f50;
+    --shadow: rgba(0, 0, 0, 0.4);
+    --shadow-hover: rgba(0, 0, 0, 0.6);
+    --header-overlay: rgba(0, 20, 40, 0.8);
+    --footer-bg: #0a1e38;
+    --input-border: #4a5b8b;
+    --input-focus: rgba(0, 180, 216, 0.5);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    min-height: 100vh;
+}
+
+/* Хедер */
+header {
+    background: linear-gradient(var(--header-overlay), var(--header-overlay)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+header h1 {
+    font-size: clamp(3rem, 7vw, 4.5rem);
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1rem;
+    animation: waveIn 1.2s ease-out;
+}
+
+header p {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 300;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2rem;
+    animation: waveIn 1.4s ease-out 0.2s backwards;
+}
+
+.btn {
+    padding: 0.9rem 2.5rem;
+    background: linear-gradient(45deg, var(--accent), var(--accent-hover));
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--shadow-hover);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Переключатель темы */
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+}
+
+.theme-toggle svg {
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.theme-toggle .moon {
+    opacity: 0;
+    transform: rotate(-90deg);
+}
+
+.dark-theme .theme-toggle .sun {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+.dark-theme .theme-toggle .moon {
+    opacity: 1;
+    transform: rotate(0);
+}
+
+.theme-toggle:hover svg {
+    transform: scale(1.1);
+}
+
+/* Секции */
+.destinations, .map, .booking {
+    padding: clamp(3rem, 6vw, 4rem) 1.5rem;
+    background: linear-gradient(180deg, var(--bg-secondary), var(--bg-primary));
+}
+
+.destinations h2, .map h2, .booking h2 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Карточки */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px var(--shadow);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.card.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px var(--shadow-hover);
+}
+
+.card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover img {
+    transform: scale(1.05);
+}
+
+.card-content {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.card-content h3 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.8rem;
+}
+
+.card-content p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.card-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--accent);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Карта */
+.map #map {
+    height: 500px;
+    max-width: 1400px;
+    margin: 0 auto;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px var(--shadow);
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.map #map.loaded {
+    opacity: 1;
+}
+
+.filter {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.filter select {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border: 2px solid var(--input-border);
+    border-radius: 12px;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+
+.filter select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 8px var(--input-focus);
+    outline: none;
+}
+
+.filter select:hover {
+    transform: translateY(-2px);
+}
+
+.reset-btn {
+    background: linear-gradient(45deg, #6b7280, #9ca3af);
+    padding: 0.6rem 1.5rem;
+}
+
+.reset-btn:hover {
+    background: linear-gradient(45deg, #4b5563, #6b7280);
+    box-shadow: 0 5px 15px var(--shadow-hover);
+}
+
+/* Форма бронирования */
+.booking {
+    background: linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));
+}
+
+.booking form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px var(--shadow);
+}
+
+.input-group {
+    position: relative;
+}
+
+.booking input, .booking select {
+    padding: 0.8rem 1rem;
+    border: 2px solid var(--input-border);
+    border-radius: 12px;
+    font-size: 1rem;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 100%;
+    padding-right: 2.5rem;
+}
+
+.booking input:focus, .booking select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 8px var(--input-focus);
+    outline: none;
+}
+
+.input-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+.booking .btn {
+    padding: 0.9rem;
+    font-size: 1.1rem;
+}
+
+.booking .btn:hover {
+    transform: scale(1.02);
+}
+
+/* Футер */
+footer {
+    background: var(--footer-bg);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Анимации */
+@keyframes waveIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    .filter {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .card {
+        transform: translateY(0);
+    }
+
+    header {
+        background-attachment: scroll;
+    }
+
+    header h1 {
+        font-size: clamp(2rem, 6vw, 3rem);
+    }
+
+    header p {
+        font-size: clamp(1rem, 3vw, 1.4rem);
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
