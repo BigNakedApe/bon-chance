@@ -1,1 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Путешествуй с нами</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Путешествуй с нами</h1>
+            <p>Открой мир невероятных приключений</p>
+            <a href="#booking" class="btn">Забронировать</a>
+        </div>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">☀️</button>
+    </header>
 
+    <section class="destinations">
+        <h2>Популярные направления</h2>
+        <div class="grid" id="destinations-grid"></div>
+    </section>
+
+    <section class="map">
+        <h2>Найдите свое путешествие</h2>
+        <div class="filter">
+            <div>
+                <label for="continent-filter">Фильтр по континенту: </label>
+                <select id="continent-filter">
+                    <option value="all">Все континенты</option>
+                    <option value="Europe">Европа</option>
+                    <option value="Asia">Азия</option>
+                    <option value="North America">Северная Америка</option>
+                    <option value="Indian Ocean">Индийский океан</option>
+                </select>
+            </div>
+            <div>
+                <label for="type-filter">Фильтр по типу: </label>
+                <select id="type-filter">
+                    <option value="all">Все типы</option>
+                    <option value="City">Городской тур</option>
+                    <option value="Beach">Пляжный отдых</option>
+                    <option value="Culture">Культурный тур</option>
+                </select>
+            </div>
+            <div>
+                <label for="budget-filter">Фильтр по бюджету: </label>
+                <select id="budget-filter">
+                    <option value="all">Все бюджеты</option>
+                    <option value="Economy">Эконом ($)</option>
+                    <option value="Standard">Средний ($$)</option>
+                    <option value="Premium">Премиум ($$$)</option>
+                </select>
+            </div>
+            <div>
+                <label for="rating-filter">Фильтр по рейтингу отеля: </label>
+                <select id="rating-filter">
+                    <option value="all">Все рейтинги</option>
+                    <option value="4.0">≥4.0</option>
+                    <option value="4.5">≥4.5</option>
+                </select>
+            </div>
+            <div>
+                <label for="price-filter">Фильтр по цене отеля: </label>
+                <select id="price-filter">
+                    <option value="all">Все цены</option>
+                    <option value="200">≤$200</option>
+                    <option value="300">≤$300</option>
+                </select>
+            </div>
+            <button class="btn reset-btn" id="reset-filters">Сбросить фильтры</button>
+        </div>
+        <div id="map"></div>
+    </section>
+
+    <section class="booking" id="booking">
+        <h2>Забронировать тур</h2>
+        <form id="booking-form">
+            <input type="text" id="name" placeholder="Ваше имя" required>
+            <input type="email" id="email" placeholder="Ваш email" required>
+            <select id="destination" required>
+                <option value="" disabled selected>Выберите направление</option>
+            </select>
+            <select id="hotel" required>
+                <option value="" disabled selected>Выберите отель</option>
+            </select>
+            <input type="date" id="date" required>
+            <button type="submit" class="btn">Отправить заявку</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2025 Путешествуй с нами. Все права защищены.</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
